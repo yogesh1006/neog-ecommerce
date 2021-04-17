@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+// import { Container } from "react-bootstrap";
+import "./App.css";
+import { Route, Switch } from "react-router-dom";
+import Footer from "./components/footer/Footer";
+import Header from "./components/header/Header";
+import Signin from "./components/signin/Signin";
+import Signup from "./components/signup/Signup";
+import PrivateRoute from "./PrivateRoute"
+import Cart from "./components/cart/Cart";
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <main className="m-4">
+        <Switch>
+          <Route path="/login" component={Signin} />
+          <Route path="/signup" component={Signup} />
+          <PrivateRoute path="/cart" component={Cart}/>
+
+        </Switch>
+      </main>
+      <Footer />
     </div>
   );
 }
