@@ -1,8 +1,38 @@
-import React from "react";
+import React,{useState} from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Container } from "react-bootstrap";
+import {signup} from "./signupapicall/index"
 
 const Signup = () => {
+  const [values, setValues]=useState({
+    first_name:"",
+    last_name:"",
+    mobile:"",
+    email:"",
+    password:"",
+});
+ 
+   const handleChange=name=>event=>{
+
+     setValues({...values,[name]:event.target.value})
+   }
+
+   const onSubmit=e=>{
+      e.preventDefault()
+      setValues({...values})
+      signup(values)
+      .then(res => console.log("df",res))
+      setValues(
+        {
+          first_name:"",
+          last_name:"",
+          mobile:"",
+          email:"",
+          password:"",
+      }
+      )
+   }
+
   return (
     <div>
       <Container>
@@ -14,20 +44,27 @@ const Signup = () => {
             <h3>Create account</h3>
           </Form.Text>
           <Form.Group controlId="formBasicName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control size="sm" type="text" placeholder="Enter name" />
+            <Form.Label>First Name</Form.Label>
+            <Form.Control value={values.first_name} onChange={handleChange("first_name")} name="first_name" size="sm" type="text" placeholder="Enter name" />
+          </Form.Group>
+          <Form.Group controlId="formBasicName">
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control value={values.last_name} onChange={handleChange("last_name")} name="last_name" size="sm" type="text" placeholder="Enter name" />
+          </Form.Group> <Form.Group controlId="formBasicName">
+            <Form.Label>Mobile </Form.Label>
+            <Form.Control value={values.mobile} onChange={handleChange("mobile")} name="mobile" size="sm" type="text" placeholder="Enter name" />
           </Form.Group>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control size="sm" type="email" placeholder="Enter email" />
+            <Form.Control value={values.email} onChange={handleChange("email")} name="email" size="sm" type="email" placeholder="Enter email" />
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control size="sm" type="password" placeholder="Password" />
+            <Form.Control value={values.password} name="password" onChange={handleChange("password")} size="sm" type="password" placeholder="Password" />
           </Form.Group>
 
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" onClick={onSubmit}>
             Sign up
           </Button>
           <Form.Text as="small" className="text-muted  my-2">

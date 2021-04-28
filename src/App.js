@@ -7,6 +7,9 @@ import Signin from "./components/signin/Signin";
 import Signup from "./components/signup/Signup";
 import PrivateRoute from "./PrivateRoute"
 import Cart from "./components/cart/Cart";
+import Products from "./components/products/Products";
+// import SideBar from "./components/sidebar/SideBar";
+
 
 
 function App() {
@@ -14,7 +17,9 @@ function App() {
     <div className="App">
       <Header />
       <main className="m-4">
+        {/* <SideBar /> */}
         <Switch>
+          <Route path="/" component={Products} exact/>
           <Route path="/login" component={Signin} />
           <Route path="/signup" component={Signup} />
           <PrivateRoute path="/cart" component={Cart}/>
